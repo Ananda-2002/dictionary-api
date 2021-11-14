@@ -70,7 +70,8 @@ def get_synonyms(word):
         if len(word.split()) == 1:
             for synset in wordnet.synsets(word):
                 for lemma in synset.lemmas():
-                    syn.append(lemma.name())  # add the synonyms
+                    if lemma.name() not in syn:
+                        syn.append(lemma.name())  # add the synonyms
                     if lemma.antonyms():  # When antonyms are available, add them into the list
                         ant.append(lemma.antonyms()[0].name())
             syn_ant['synonyms'] = {word: list(syn)}
@@ -80,7 +81,8 @@ def get_synonyms(word):
         for w in word.split():
             for synset in wordnet.synsets(w):
                 for lemma in synset.lemmas():
-                    syn.append(lemma.name())  # add the synonyms
+                    if lemma.name() not in syn:
+                        syn.append(lemma.name())  # add the synonyms
                     if lemma.antonyms():  # When antonyms are available, add them into the list
                         ant.append(lemma.antonyms()[0].name())
 

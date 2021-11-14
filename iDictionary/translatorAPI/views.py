@@ -16,9 +16,11 @@ def is_valid_key(key):
 @api_view(['POST'])
 def all(request):
     if request.method == 'POST':
-        key = request.META.get('HTTP_KEY')
-        if not is_valid_key(key):
-            return Response({'status': 403, 'message': 'key not valid!'})
+        '''
+        # key = request.META.get('HTTP_KEY')
+        # if not is_valid_key(key):
+        #     return Response({'status': 403, 'message': 'key not valid!'})
+        '''
         try:
             data = request.data
             res = get_all(data['text'], data['from'], data['to'])
@@ -48,6 +50,7 @@ def synonyms(request):
         try:
             data = request.data
             res = get_synonyms(data['text'])
+
             return Response({'status': 200, 'payload': res, 'message': 'api working'})
         except Exception as e:
             print(e)
